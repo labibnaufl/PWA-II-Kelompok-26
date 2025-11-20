@@ -9,7 +9,11 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: false,
+      injectRegister: 'auto', // BIARKAN SW TERDAFTAR OTOMATIS
+
+      filename: 'sw.js', // WAJIB UNTUK VERCEL
+      strategies: 'generateSW', // PALING KOMPATIBEL UNTUK VERCEL
+      outDir: 'dist', // default, aman ditambahkan
 
       includeAssets: [
         'favicon.ico',
@@ -57,12 +61,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
-      },
-
-      devOptions: {
-        enabled: false,
-        navigateFallback: 'index.html',
-        suppressWarnings: true,
+        skipWaiting: true, // WAJIB untuk PWA stabil
       },
     }),
   ],
